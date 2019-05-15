@@ -1,5 +1,5 @@
  
-<%= form_for(:registrations, url: sign_in_path) do |f| %>
+<%= form_for(:registrations, url: 'http://localhost:3000/users/sign_up') do |f| %>
 	<div class="form-group">
 	    <%= f.label :name, "Name" %>
 	    <%= f.text_field :name %>
@@ -24,6 +24,6 @@
 	    <%= f.password_field :password, autocomplete: "off" %>
 	</div>
 	<div class="actions">
-	    <%= f.submit "Sign in" %>
+	    <%= f.submit "Sign up" %>
 	</div>
 <% end %>

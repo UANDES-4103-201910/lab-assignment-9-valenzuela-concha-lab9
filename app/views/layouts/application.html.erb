@@ -9,6 +9,23 @@
   </head>
 
   <body>
+    <nav>
+
+      <ul class="right hide-on-med-and-down">
+
+          <% def ses %>
+            <% session.destroy %>
+          <% end %>
+
+          <% if (current_user == nil)%> 
+            <li><a href="http://localhost:3000/users/sign_in" style="color:white"><span class="glyphicon glyphicon-log-in"></span> SIGN IN </a></li>
+            <li><a href="http://localhost:3000/users/sign_up" style="color:white"><span class="glyphicon glyphicon-log-in"></span> SIGN UP </a></li>
+
+          <% else %>
+              <a href='http://localhost:3000/users/sign_out' data-method="delete" style="color:white"><span class="glyphicon glyphicon-log-out"></span> SIGN OUT </a></li>
+
+          <% end %>
+    </nav>
   	<p id="notice"><%= notice %></p>
     <%= yield %>
   </body>
