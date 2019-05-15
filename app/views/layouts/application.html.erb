@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Lab4Assignment</title>
+    <title>Lab9Assignment</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,19 +9,40 @@
   </head>
 
   <body>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.3&appId=419393995511152&autoLogAppEvents=1"></script>
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '419393995511152',
+          cookie     : true,
+          xfbml      : true,
+          version    : 'v3.3'
+        });
+          
+        FB.AppEvents.logPageView();   
+          
+      };
+
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "https://connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
+    </script>
     <nav>
 
       <ul class="right hide-on-med-and-down">
-
-          <% def ses %>
-            <% session.destroy %>
-          <% end %>
+          <div class="fb-login-button" data-width="" data-size="medium" data-button-type="login_with" data-auto-logout-link="true" data-use-continue-as="false"></div>
 
           <% if current_user == nil %>
 
             <li><a href="http://localhost:3000/users/sign_in" style="color:white"><span class="glyphicon glyphicon-log-in"></span> SIGN IN </a></li>
             <li><a href="http://localhost:3000/users/sign_up" style="color:white"><span class="glyphicon glyphicon-log-in"></span> SIGN UP </a></li>
 
+          <%else%>
             <a href='http://localhost:3000/users/sign_out' data-method="delete" style="color:white"><span class="glyphicon glyphicon-log-out"></span> SIGN OUT </a></li>
           <% end %>
     </nav>

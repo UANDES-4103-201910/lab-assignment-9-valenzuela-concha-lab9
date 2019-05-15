@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
 		user = User.find_by(email: params[:session][:email])
 	    if user && user[:password] == params[:session][:password]
 	      	log_inn user
-      		redirect_to root_url
+      		redirect_to users_url
 	    else
 	      	flash.now[:error] = "Invalid email/password combination."
 	      	render 'new'
@@ -15,8 +15,7 @@ class SessionsController < ApplicationController
 
 	def destroy
 	    session.delete(:id)
-	    @current_user = nil
-
+	    current_user = nil
 	    redirect_to "http://localhost:3000/users/sign_in"
 	    
 	end	
