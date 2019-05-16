@@ -1,6 +1,6 @@
 
 
- <%= form_for(:session, url: 'http://localhost:3000/users/sign_in') do |f| %>
+ <%= form_for(:session, url: log_in_path) do |f| %>
   <div class="form-group">
     <%= f.label :email,"Email" %><br />
     <%= f.email_field :email, autofocus: true  %>
@@ -15,4 +15,3 @@
   </div>
   <br>
 <% end %>
-
