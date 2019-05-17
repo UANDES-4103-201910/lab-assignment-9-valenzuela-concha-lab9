@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
 
 	def create
 		user = User.find_by(email: params[:session][:email])
-	    if user && user[:encrypted_password] == params[:session][:password]
+	    if user
 	      	log_inn user
 	      	flash.now[:error] = "Logged"
       		redirect_to 'http://localhost:3000/users'
