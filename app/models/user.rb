@@ -13,12 +13,14 @@ class User < ApplicationRecord
   	validates :password, format: {with: /\A[a-zA-Z0-9\.]{8,12}\z/ , message: "assword must be between 8 to 12 alphanumeric characters"}
 
   	def self.from_omniauth(auth)
-      where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-        user.provider = auth.provider
-        user.uid = auth.uid
+
+      where(email: auth.info.email).first_or_initialize.tap do |user|
         user.email = auth.info.email
         user.password = Devise.friendly_token[0,20]
+        user.name = auth.info.name
+        user.save
       end
+
   	end
 
 

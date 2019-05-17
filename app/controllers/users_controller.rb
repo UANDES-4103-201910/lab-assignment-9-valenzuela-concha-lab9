@@ -41,10 +41,10 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     #complete this method
-    @user = User.find(params[:id])
-    if @user.update(user_params)
+    user = User.find(params[:id])
+    if user.update(user_params)
         flash[:success] = "Successfully updated."
-        redirect_to @user
+        redirect_to user
       else
         flash[:error] = "Cannot update this user."
         render :edit
@@ -74,9 +74,13 @@ class UsersController < ApplicationController
       params.require(:user).permit(:name, :last_name, :email, :password, :phone)
     end
 
-      def correct_user
-          @user = User.find(params[:id])
-          redirect_to(root_url) unless @user == current_user
-      end
+    def correct_user
+        @user = User.find(params[:id])
+        redirect_to(root_url) unless @user == current_user
+    end
+
+    def after_sign_in_path_for(resource)
+      'http://localhost:3000/users'
+    end
 
 end

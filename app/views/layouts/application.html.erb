@@ -43,6 +43,8 @@
             <li><a href="http://localhost:3000/users/sign_up" style="color:white"><span class="glyphicon glyphicon-log-in"></span> SIGN UP </a></li>
 
           <%else%>
+
+            <%= current_user[:email] %>
             <a href='http://localhost:3000/users/sign_out' data-method="delete" style="color:white"><span class="glyphicon glyphicon-log-out"></span> SIGN OUT </a></li>
           <% end %>
     </nav>

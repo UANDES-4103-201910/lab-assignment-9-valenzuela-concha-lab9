@@ -19,7 +19,8 @@ class ApplicationController < ActionController::Base
 	#complete this method
       unless logged_in?
         flash[:error] = "Please log in."
-        redirect_to root_url
+        redirect_to 'http://localhost:3000/users/sign_in'
       end
   end
+
 end
