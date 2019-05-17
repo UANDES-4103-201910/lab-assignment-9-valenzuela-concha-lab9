@@ -18,14 +18,3 @@
 //= require turbolinks  
 //= require materialize-sprockets
 //= require materialize/extras/nouislider
-
-FB.getLoginStatus(function(response) {
-    statusChangeCallback(response);
-});
-
-
-function checkLoginState() {
-  FB.getLoginStatus(function(response) {
-    statusChangeCallback(response);
-  });
-}
