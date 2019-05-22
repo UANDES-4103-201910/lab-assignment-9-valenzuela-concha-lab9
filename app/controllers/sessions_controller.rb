@@ -11,13 +11,16 @@ class SessionsController < ApplicationController
 
 	def create
 		user = User.where(email: user_params[:email]).first
-		puts user
-		if user && user.password == user_params[:password]
+		puts user.encrypted_password
+		puts user_params[:password]
+		if user.valid_password?(user_params[:password])
 	      # Save the user ID in the session so it can be used in
 	      # subsequent requests
 	      session[:current_user_id] = user.id
+	      puts session[:current_user_id]
 	      flash[:notice] = "Successful Login"
-	      redirect_to user
+	      puts "Hello"
+	      redirect_to users_path
 	    else
 	    	flash[:error] = "Invalid credentials"
 	    	redirect_to root_url
@@ -26,7 +29,9 @@ class SessionsController < ApplicationController
 
 	def destroy
 		@current_user = session[:current_user_id] = nil
-		session["warden.user.user.key"][0][0] = 0
+		if session["warden.user.user.key"]
+			session["warden.user.user.key"][0][0] = 0
+		end
     	redirect_to root_url
 	end
 

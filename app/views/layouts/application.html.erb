@@ -10,9 +10,12 @@
 
   <body>
     <nav class="navbar">
-      
-        <button>Log in</button>
-        <button><%= link_to "Sign in with Google", user_google_oauth2_omniauth_authorize_path %></button>
+        <% if current_user %>
+          <li><a  href="http://localhost:3000/users/sign_out" data-method="delete">Log out</a> </li>
+        <% else %>
+          <li><a  href="http://localhost:3000/sign_in">Log in</a></li>
+          <button><%= link_to "Sign in with Google", user_google_oauth2_omniauth_authorize_path %></button>
+        <% end %>
       
     </nav>
   	<p id="notice"><%= notice %></p>
