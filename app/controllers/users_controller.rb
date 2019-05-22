@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
-  #before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :is_user_logged_in?
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users
   # GET /users.json
@@ -11,12 +10,12 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @user = User.find(params[:id])
+
   end
 
   # GET /users/new
   def new
-    @user = User.new
+    #@user = User.new
   end
 
   # GET /users/1/edit
@@ -26,41 +25,41 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    #complete this method
-    @user = User.new(user_params)
-    if @user.save(user_params)
-        flash[:success] = "Successfully created."
-        redirect_to @user
+    #@user = User.new(user_params)
+
+    respond_to do |format|
+      if @user.save
+        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.json { render :json }
       else
-        flash.now[:error] = "Cannot create this user."
-        render :new
+        format.html { render :new }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
       end
+    end
   end
 
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
-    #complete this method
-    user = User.find(params[:id])
-    if user.update(user_params)
-        flash[:success] = "Successfully updated."
-        redirect_to user
+    respond_to do |format|
+      if @user.update(user_params)
+        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.json { render json: {user: @user} }
       else
-        flash[:error] = "Cannot update this user."
-        render :edit
+        format.html { render :edit }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
       end
+    end
   end
 
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    #complete this method
-    @user = User.find(params[:id])
     @user.destroy
-    if @user.destroy
-        flash[:success] = "Successfully destroyed."
-        redirect_to 'http://localhost:3000/'
-      end
+    respond_to do |format|
+      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
+      format.json { head :json }
+    end
   end
 
   private
@@ -73,14 +72,7 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:name, :last_name, :email, :password, :phone)
     end
-
-    def correct_user
-        @user = User.find(params[:id])
-        redirect_to(root_url) unless @user == current_user
-    end
-
-    def after_sign_in_path_for(resource)
-      'http://localhost:3000/users'
-    end
-
 end
+
+
+

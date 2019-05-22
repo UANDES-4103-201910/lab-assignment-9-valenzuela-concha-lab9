@@ -1,14 +1,14 @@
 # frozen_string_literal: true
+
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
-
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = '57f466465ac7ac8a7b140d30fb186f82b7d115483d2921132aaf0bab8bb08699fe37e62b22edbcf767be93d5856b9f8f4588fdf616118cf9a9bea4860b330dc2'
+  # config.secret_key = '78c3bfa3ebf668f8539de24c08d601525ae799f7a391abe9e91c721106467fced4972870b2c76ff79b6715b4daf42c9bbc69b0ca47965106b96401b1f480eb8e'
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
@@ -88,7 +88,7 @@ Devise.setup do |config|
   # Notice that if you are skipping storage for all authentication paths, you
   # may want to disable generating routes to Devise's sessions controller by
   # passing skip: :sessions to `devise_for` in your config/routes.rb
-  config.skip_session_storage = [:http_auth]
+  config.skip_session_storage = [:database]
 
   # By default, Devise cleans up the CSRF token on authentication to
   # avoid CSRF token fixation attacks. This means that, when using AJAX
@@ -114,7 +114,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 11
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = 'e14b1988f0461646e32b1cafd4e027edeea7e0c498e5a9e6ffbe40b37b6c166a88195d47c115313fcb31635194ae91cc4e480854fc443fa3ad05d7424ec43788'
+  # config.pepper = '3b0cfee75b5bfd3a3334eb8e9d2be43b24bf4ca9015f0a26066136836b0fd0ff1b91cc4e29310d3774079630140a0375b987648768b8e6c037450da921e7a26e'
 
   # Send a notification to the original email when the user's email is changed.
   # config.send_email_changed_notification = false
@@ -296,5 +296,8 @@ Devise.setup do |config|
   # When set to false, does not sign a user in automatically after their password is
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
   # config.sign_in_after_change_password = true
-  config.omniauth :facebook, "419393995511152", "dace0a8fd63eebf8572bedf9dd883d49"
+
+  config.omniauth :google_oauth2, '146984985012-j84rmrnmee7pu1e70naenlo727bp309e.apps.googleusercontent.com', 'weiHwEAalPDIGZdJPPg4b24j', {}
+
+  
 end
