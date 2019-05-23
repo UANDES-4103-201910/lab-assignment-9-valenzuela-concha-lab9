@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_15_130726) do
+ActiveRecord::Schema.define(version: 2019_05_23_223912) do
 
   create_table "events", force: :cascade do |t|
     t.string "name"
@@ -28,6 +28,13 @@ ActiveRecord::Schema.define(version: 2019_05_15_130726) do
     t.integer "capacity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "shopping_bags", force: :cascade do |t|
+    t.integer "user_ticket_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_ticket_id"], name: "index_shopping_bags_on_user_ticket_id"
   end
 
   create_table "tickets", force: :cascade do |t|
@@ -59,6 +66,7 @@ ActiveRecord::Schema.define(version: 2019_05_15_130726) do
     t.string "address"
     t.string "provider"
     t.boolean "admin"
+    t.boolean "log"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "email", default: "", null: false

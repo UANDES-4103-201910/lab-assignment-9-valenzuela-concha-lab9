@@ -3,6 +3,18 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :users
   resources :places
+  resources :events
+  resources :tickets do
+    collection do
+      get :shopping
+    end
+  end
+  
+  resources :user_tickets do
+    collection do
+        get :index_shopping_bag
+    end
+  end
 
   root :to => 'sessions#new'
 

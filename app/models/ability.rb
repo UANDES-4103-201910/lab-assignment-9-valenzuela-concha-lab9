@@ -9,14 +9,16 @@ class Ability
     can :read, Place
     can :read, Event
     can :create, UserTicket
-    puts "hola" 
-    puts user.id.to_s + "hola"
+    can :read, UserTicket, :user_id => user.id
+    can :read, User, :id => user.id
+    can :update, User, :id => user.id
     if user.admin
-        puts "hols"
+        puts "usersssss"
         can :manage, Ticket
         can :manage, Place
         can :manage, Event
         can :manage, UserTicket
+        can :manage, User
         end
         
     #nd

@@ -1,0 +1,46 @@
+
+<h1>Edit Event</h1>
+ 
+<%= form_with(model: @event, local: true) do |form| %>
+ 
+  <% if @event.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@event.errors.count, "error") %> prohibited
+        this article from being saved:
+      </h2>
+      <ul>
+        <% @event.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+ 
+  <p>
+    <%= form.label :name %><br>
+    <%= form.text_field :name %>
+  </p>
+ 
+  <p>
+    <%= form.label :description %><br>
+    <%= form.text_area :description %>
+  </p>
+
+  <p>
+    <%= form.label :start_date %><br>
+    <%= form.date_field :start_date %>
+  </p>
+
+  <p>
+    <%= form.label :place_id %><br>
+    <%= form.collection_select(:place_id, Place.all, :id, :name)%>
+  </p>
+ 
+  <p>
+    <%= form.submit %>
+  </p>
+ 
+<% end %>
+ 
+<%= link_to 'Back', events_path %>

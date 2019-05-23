@@ -3,7 +3,13 @@ class ApplicationController < ActionController::Base
   layout proc { google_logged_in ? "glogged_in" : "application" }
   before_action :authenticate_user!
   
-  
+  def current_ability
+    current_user.ability
+  end
+
+  def ability
+    @ability ||= Ability.new(self)
+  end
 
   def index
     render json: {session: session}

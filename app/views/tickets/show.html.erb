@@ -1,0 +1,12 @@
+
+<br>
+<h2><%= @ticket.description %></h2>
+<h3>$<%= @ticket.price %></h3>
+<h3><%= Event.find(@ticket.event_id).name %></h3>
+<% user = User.find(session["warden.user.user.key"][0][0]) %>
+<% a = Ability.new(user) %>
+<% if a.can? :manage, @ticket%>
+	<%= link_to 'Edit', edit_ticket_path(@ticket) %> |
+<% end %>
+<p><%= link_to 'Add to the Shopping Bag', user_tickets_path(@ticket), method: :shopping %></p>
+<%= link_to 'Back', tickets_path %>

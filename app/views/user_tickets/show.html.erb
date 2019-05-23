@@ -1,0 +1,15 @@
+
+<br>
+<% user = User.find(session["warden.user.user.key"][0][0]) %>
+<% a = Ability.new(user) %>
+<% if a.can? :read, @user_ticket%>
+	<h2><%= User.find(@user_ticket.user_id).name %></h2>
+	<h3><%= Ticket.find(@user_ticket.ticket_id).description %></h3>
+	<h3><%= Event.find(Ticket.find(@user_ticket.ticket_id).event_id).name %></h3>
+	<h3><%= @user_ticket.time%></h3>
+	<h3>Paid:<%= @user_ticket.paid%></h3>
+	<% if a.can? :manage, @user_ticket%>
+		<%= link_to 'Edit', edit_user_ticket_path(@user_ticket), method: :create %> |
+	<% end %>
+	<%= link_to 'Back', user_tickets_path %>
+<% end %>

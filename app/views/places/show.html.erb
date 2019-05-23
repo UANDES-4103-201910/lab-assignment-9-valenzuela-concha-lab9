@@ -3,3 +3,9 @@
 <h2><%= @place.name %></h2>
 <h3><%= @place.address %></h3>
 <h3><%= @place.capacity %></h3>
+<% user = User.find(session["warden.user.user.key"][0][0]) %>
+<% a = Ability.new(user) %>
+<% if a.can? :manage, @place%>
+	<%= link_to 'Edit', edit_place_path(@place) %> |
+<% end %>
+<%= link_to 'Back', places_path %>

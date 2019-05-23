@@ -1,0 +1,35 @@
+<h1>New User Ticket<h1>
+
+<br><br><table>
+  <tr>
+    <th><h6>ID</h6></th>
+    <th><h6>Price</h6></th>
+    <th><h6>Event</h6></th>
+  </tr>
+ 
+  <% for ticket in Ticket.all %>
+    <tr>
+      <td><%= ticket.id %></td>
+      <td>$<%= ticket.price %></td>
+      <td><%= Event.find(ticket.event_id).name %></td>
+    </tr>
+  <% end %>
+</table>
+<%= form_with scope: :user_ticket, url: user_tickets_path, local: true do |form| %>
+
+  <p>
+   
+    <%= form.label :ticket_id,"Ticket ID" %><br>
+    <%= form.collection_select(:ticket_id, Ticket.all, :id, :id, :prompt => true)%>
+  </p>
+ 
+  <p>
+    <%= form.label :paid %><br>
+    <%= form.check_box :paid%>
+  </p>
+ 
+  <p>
+    <%= form.submit %>
+  </p>
+
+<% end %>

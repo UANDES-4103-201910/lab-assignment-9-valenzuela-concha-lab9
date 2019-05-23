@@ -11,6 +11,7 @@ class CreateUsers < ActiveRecord::Migration[5.1]
 
       t.string :provider
       t.boolean :admin
+      t.boolean :log
 
       t.timestamps
     end

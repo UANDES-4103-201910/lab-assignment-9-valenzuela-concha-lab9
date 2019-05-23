@@ -1,0 +1,23 @@
+<h1>New Ticket<h1>
+
+
+<%= form_with scope: :ticket, url: tickets_path, local: true do |form| %>
+  <p>
+    <%= form.label :description %><br>
+    <%= form.text_field :description %>
+  </p>
+ 
+  <p>
+    <%= form.label :price %><br>
+    <%= form.text_area :price %>
+  </p>
+
+  <p>
+    <%= form.label :event_id %><br>
+    <%= form.collection_select(:event_id, Event.all, :id, :name)%>
+  </p>
+ 
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>

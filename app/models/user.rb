@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  delegate :can?, :cannot?, :to => :ability
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable,
          :omniauthable, omniauth_providers: [:google_oauth2]
@@ -20,6 +22,11 @@ class User < ApplicationRecord
 			user.password = Devise.friendly_token[0, 20]
 		end
 	end
+
+
+	def ability
+   	 	@ability ||= Ability.new(self)
+  	end
 end
 
  

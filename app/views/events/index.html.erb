@@ -1,0 +1,36 @@
+<h1>Listing Events</h1>
+
+<%= link_to 'New event', new_event_path %>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Start Date</th>
+    <th>Place</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+ 
+  <% @events.each do |event| %>
+    <tr>
+      <td><%= event.name %></td>
+      <td><%= event.description %></td>
+      <td><%= event.start_date %></td>
+      <td><%= Place.find(event.place_id).name %></td>
+      <td><%= link_to 'Show', event_path(event) %></td>
+      
+      <% user = User.find(session["warden.user.user.key"][0][0]) %>
+      <% a = Ability.new(user) %>
+      <% if a.can? :manage, event%>
+        <td><%= link_to 'Edit', edit_event_path(event) %></td>
+        <td><%= link_to 'Destroy', event_path(event),
+                    method: :delete,
+                    data: { confirm: 'Are you sure you want to delete this post?' }%></td>
+        
+
+      <% end %>
+
+
+  <% end %>
+</table>

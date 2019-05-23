@@ -1,11 +1,13 @@
 <h1>Listing Places</h1>
- <h1><%=session["warden.user.user.key"][0][0]%></h1>
 
+<%= link_to 'New place', new_place_path %>
 <table>
   <tr>
     <th>Name</th>
     <th>Address</th>
     <th>Capacity</th>
+    <th></th>
+    <th></th>
     <th></th>
   </tr>
  
@@ -15,22 +17,16 @@
       <td><%= place.address %></td>
       <td><%= place.capacity %></td>
       <td><%= link_to 'Show', place_path(place) %></td>
-
-      <% if can? :destroy, place%>
+      
+      <% user = User.find(session["warden.user.user.key"][0][0]) %>
+      <% a = Ability.new(user) %>
+      <% if a.can? :manage, place%>
         <td><%= link_to 'Edit', edit_place_path(place) %></td>
-        <td><%= link_to place_path(place),
+        <td><%= link_to 'Destroy', place_path(place),
                     method: :delete,
-                    data: { confirm: 'Are you sure you want to delete this post?' } do %></td>
-        <% end %>
+                    data: { confirm: 'Are you sure you want to delete this post?' }%></td>
       <% end %>
 
-      <% if User.find(session["warden.user.user.key"][0][0]).admin %>
-        <td><%= link_to 'Edit', edit_place_path(place) %></td>
-        <td><%= link_to place_path(place),
-                    method: :delete,
-                    data: { confirm: 'Are you sure you want to delete this post?' } do %></td>
-        <% end %>
-      <% end %>
 
   <% end %>
 </table>
