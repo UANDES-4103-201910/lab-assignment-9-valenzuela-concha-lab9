@@ -10,10 +10,7 @@
     <th></th>
     <th></th>
   </tr>
- <% puts "helloooo" %>
- <% puts @shopping_bag %>
   <% @shopping_bag.each do |sb| %>
-  <% puts sb.user_id %>
     <tr>
       <% total += Ticket.find(sb.ticket_id).price %>
       <% user = User.find(session["warden.user.user.key"][0][0]) %>
