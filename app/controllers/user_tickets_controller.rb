@@ -52,7 +52,6 @@ class UserTicketsController < ApplicationController
   end
 
   def paid
-  	puts "helooooo"
   	@shopping_bag = []
 
 		for ut in UserTicket.all
@@ -62,8 +61,6 @@ class UserTicketsController < ApplicationController
 		end
 	for ut in @shopping_bag
 		UserTicket.update(ut.id, :paid => true)
-		puts ut.paid 
-		puts "status"
 	end
 
   end

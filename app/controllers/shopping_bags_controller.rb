@@ -14,7 +14,4 @@ class ShoppingBagsController < ApplicationController
 		end
 	end
 
-	def create
-		@post 
-
 end
