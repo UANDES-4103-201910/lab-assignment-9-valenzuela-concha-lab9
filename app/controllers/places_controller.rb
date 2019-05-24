@@ -1,7 +1,11 @@
 class PlacesController < ApplicationController
 
 	def index
-		@places = Place.all
+	  @places = if params[:name]
+	    Place.where('name LIKE ?', "%#{params[:name]}%")
+	  else
+	    Place.all
+	  end
 	end
 
 

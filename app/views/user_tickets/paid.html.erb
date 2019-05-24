@@ -1,6 +1,7 @@
-<h1>Shopping Bag</h1>
-<% total = 0 %>
+<h1>Receipt</h1>
 
+<% total = 0 %>
+<p>Date: <%= DateTime.now %></p>
 <table>
   <tr>
     <th>Ticket</th>
@@ -8,21 +9,26 @@
     <th>Price</th>
     <th></th>
     <th></th>
-    <th></th>
   </tr>
- 
+ <% puts "helloooo" %>
+ <% puts @shopping_bag %>
   <% @shopping_bag.each do |sb| %>
+  <% puts sb.user_id %>
     <tr>
       <% total += Ticket.find(sb.ticket_id).price %>
       <% user = User.find(session["warden.user.user.key"][0][0]) %>
       <% a = Ability.new(user) %>
-      <% if a.can? :manage, sb%>
+      <% if a.can? :read, sb%>
         <td><%= Ticket.find(sb.ticket_id).description%></td>
-        <td>$<%= Event.find(Ticket.find(sb.ticket_id).event_id).name %></td>
-        <td><%= Ticket.find(sb.ticket_id).price %></td>
+        <td><%= Event.find(Ticket.find(sb.ticket_id).event_id).name %></td>
+        <td>$<%= Ticket.find(sb.ticket_id).price %></td>
+
       <% end %>
 
   <% end %>
 </table>
 
-<h3> Total: <%=total%></h3>
+<h2>Total: <%= total %></h2>
+
+
+

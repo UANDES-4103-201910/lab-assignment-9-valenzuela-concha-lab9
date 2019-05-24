@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :user_tickets do
     collection do
       get :index_shopping_bag
+      get :paid
     end
   end
 

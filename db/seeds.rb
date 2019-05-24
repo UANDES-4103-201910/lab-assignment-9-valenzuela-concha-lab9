@@ -19,7 +19,7 @@ event_2 = Event.create(name: 'Facebook Hackathon 2018', start_date: DateTime.new
 event_3 = Event.create(name: 'Lollapalooza 2018', start_date: DateTime.new(2019, 06, 25), place: place_2)
 event_4 = Event.create(name: 'Festival de Viña 2018', start_date: DateTime.new(2019, 06, 30), place: place_2)
 
-ticket_1 = Ticket.create(price: 5000, event: event_1)
+ticket_1 = Ticket.create(description: "Tribuna", price: 5000, event: event_1)
 ticket_2 = Ticket.create(price: 5000, event: event_1)
 ticket_3 = Ticket.create(price: 5000, event: event_1)
 ticket_4 = Ticket.create(price: 5000, event: event_2)

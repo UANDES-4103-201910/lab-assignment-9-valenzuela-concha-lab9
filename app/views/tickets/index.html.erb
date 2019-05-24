@@ -1,5 +1,10 @@
 <h1>Listing Tickets</h1>
 
+<%= form_tag(tickets_path, method: :get) do %>
+  <%= text_field_tag :description, params[:description] %>
+  <%= submit_tag 'Search', name: nil %>
+<% end %>
+
 <%= link_to 'New ticket', new_ticket_path %>
 <table>
   <tr>

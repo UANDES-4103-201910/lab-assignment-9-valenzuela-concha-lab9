@@ -2,7 +2,11 @@ class TicketsController < ApplicationController
 
 
 	def index
-		@tickets = Ticket.all
+		@tickets = if params[:description]
+	    Ticket.where('description LIKE ?', "%#{params[:description]}%")
+	  else
+	    Ticket.all
+	  end
 	end
 
 

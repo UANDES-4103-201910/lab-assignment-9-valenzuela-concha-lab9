@@ -1,8 +1,11 @@
-
+<%= form_tag(user_tickets_path, method: :get) do %>
+  <%= text_field_tag :time, params[:time] %>
+  <%= submit_tag 'Search', name: nil %>
+<% end %>
 
 <h1>Listing User Tickets</h1>
 
-<%= link_to 'New user ticket', new_user_ticket_path %>
+
 <table>
   <tr>
     <th>User</th>

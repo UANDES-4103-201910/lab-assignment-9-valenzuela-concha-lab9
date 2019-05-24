@@ -1,8 +1,15 @@
 class EventsController < ApplicationController
 	
+
+
 	def index
-		@events = Event.all
+	  @events = if params[:name]
+	    Event.where('name LIKE ?', "%#{params[:name]}%")
+	  else
+	    Event.all
+	  end
 	end
+
 
 	def show
 		@event = Event.find(params[:id])

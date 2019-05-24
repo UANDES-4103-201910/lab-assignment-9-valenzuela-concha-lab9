@@ -1,5 +1,10 @@
 <h1>Listing Events</h1>
 
+<%= form_tag(events_path, method: :get) do %>
+  <%= text_field_tag :name, params[:name] %>
+  <%= submit_tag 'Search', name: nil %>
+<% end %>
+
 <%= link_to 'New event', new_event_path %>
 <table>
   <tr>

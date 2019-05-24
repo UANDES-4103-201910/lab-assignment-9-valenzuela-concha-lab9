@@ -21,6 +21,7 @@
         <td><%= Ticket.find(sb.ticket_id).description%></td>
         <td><%= Event.find(Ticket.find(sb.ticket_id).event_id).name %></td>
         <td>$<%= Ticket.find(sb.ticket_id).price %></td>
+        <td><%= sb.paid %></td>
         <td><%= link_to 'Remove', user_ticket_path(sb),
                         method: :delete,
                         data: { confirm: 'Are you sure you want to delete this post?' }%></td>
@@ -30,3 +31,6 @@
 </table>
 
 <h3> Total: <%=total%></h3>
+
+
+<button><%= link_to 'Pay', paid_user_tickets_path(@shopping_bag) %></button>

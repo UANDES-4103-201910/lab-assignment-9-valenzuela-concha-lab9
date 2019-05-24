@@ -2,7 +2,11 @@ class UserTicketsController < ApplicationController
 
 
 	def index
-		@user_tickets = UserTicket.all
+		@user_tickets = if params[:time]
+	    UserTicket.where('time LIKE ?', "%#{params[:time]}%")
+	  else
+	    UserTicket.all
+	  end
 	end
 
 
@@ -16,7 +20,7 @@ class UserTicketsController < ApplicationController
 
 	def create
 		@ticket = Ticket.find(params[:ticket_id])
-		@user_ticket = UserTicket.create(user_id: User.find(session["warden.user.user.key"][0][0]).id, ticket_id: @ticket.id)
+		@user_ticket = UserTicket.create(user_id: User.find(session["warden.user.user.key"][0][0]).id, ticket_id: @ticket.id, time: DateTime.now)
 		redirect_to tickets_path
 	end
 
@@ -41,16 +45,33 @@ class UserTicketsController < ApplicationController
 		@shopping_bag = []
 
 		for ut in UserTicket.all
-			if ut.user_id == User.find(session["warden.user.user.key"][0][0]).id
+			if ut.user_id == User.find(session["warden.user.user.key"][0][0]).id && ut.paid != true
 				@shopping_bag << ut
 			end
 		end
+  end
+
+  def paid
+  	puts "helooooo"
+  	@shopping_bag = []
+
+		for ut in UserTicket.all
+			if ut.user_id == User.find(session["warden.user.user.key"][0][0]).id && ut.paid != true
+				@shopping_bag << ut
+			end
+		end
+	for ut in @shopping_bag
+		UserTicket.update(ut.id, :paid => true)
+		puts ut.paid 
+		puts "status"
+	end
+
   end
 
 
 
 	private
 		def user_ticket_params
-			params.require(:user_ticket).permit(:ticket_id, :paid).merge(user_id: session["warden.user.user.key"][0][0])
+			params.require(:user_ticket).permit(:ticket_id, :paid).merge(user_id: session["warden.user.user.key"][0][0], time: Date.now)
 		end
 end

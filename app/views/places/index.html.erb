@@ -1,5 +1,8 @@
 <h1>Listing Places</h1>
-
+<%= form_tag(places_path, method: :get) do %>
+  <%= text_field_tag :name, params[:name] %>
+  <%= submit_tag 'Search', name: nil %>
+<% end %>
 <%= link_to 'New place', new_place_path %>
 <table>
   <tr>
