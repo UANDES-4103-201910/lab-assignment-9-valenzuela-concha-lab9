@@ -10,7 +10,10 @@
 
   <body>
     <nav class="navbar">
-      
+        <button><%= link_to "Places", "http://localhost:3000/places"%></button>
+        <button><%= link_to "Events", "http://localhost:3000/events"%></button>
+        <button><%= link_to "Ticket", "http://localhost:3000/tickets"%></button>
+        <button><%= link_to "User Ticket", "http://localhost:3000/user_tickets"%></button>
         <button><%= link_to "Log in", sign_in_path %></button>
         <button><%= link_to "Sign in with Google", user_google_oauth2_omniauth_authorize_path %></button>
       

@@ -8,18 +8,19 @@ class Ability
     can :read, Ticket
     can :read, Place
     can :read, Event
+
     can :create, UserTicket
     can :read, UserTicket, :user_id => user.id
     can :read, User, :id => user.id
     can :update, User, :id => user.id
+
     if user.admin
-        puts "usersssss"
         can :manage, Ticket
         can :manage, Place
         can :manage, Event
         can :manage, UserTicket
         can :manage, User
-        end
+    end
         
     #nd
 
