@@ -8,5 +8,5 @@
 <% if a.can? :manage, @ticket%>
 	<%= link_to 'Edit', edit_ticket_path(@ticket) %> |
 <% end %>
-<p><%= link_to 'Add to the Shopping Bag', user_tickets_path(@ticket), method: :shopping %></p>
+<p><%= link_to 'Add to the Shopping Bag', ticket_user_tickets_path(@ticket), method: :create %></p>
 <%= link_to 'Back', tickets_path %>

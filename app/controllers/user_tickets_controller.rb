@@ -10,20 +10,14 @@ class UserTicketsController < ApplicationController
 		@user_ticket = UserTicket.find(params[:id])
 	end
 
-	def new
-	end
-
 	def edit
 		@user_ticket = UserTicket.find(params[:id])
 	end
 
 	def create
-
-		puts "hola"
-		puts params
-		@ticket = Ticket.find(params[:id])
+		@ticket = Ticket.find(params[:ticket_id])
 		@user_ticket = UserTicket.create(user_id: User.find(session["warden.user.user.key"][0][0]).id, ticket_id: @ticket.id)
-		redirect_to @user_ticket
+		redirect_to tickets_path
 	end
 
 	def update
@@ -53,14 +47,6 @@ class UserTicketsController < ApplicationController
 		end
   end
 
-
-  def shopping
-  	puts "hola"
-	puts params
-	@ticket = Ticket.find(params[:ticket_id])
-	@user_ticket = UserTicket.create(user_id: User.find(session["warden.user.user.key"][0][0]).id, ticket_id: @ticket.id)
-	redirect_to @user_ticket
-  end
 
 
 	private

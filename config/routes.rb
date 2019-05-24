@@ -5,16 +5,14 @@ Rails.application.routes.draw do
   resources :places
   resources :events
   resources :tickets do
-    collection do
-      get :shopping
-    end
+    resources :user_tickets, only: [:create]
   end
-  
   resources :user_tickets do
     collection do
-        get :index_shopping_bag
+      get :index_shopping_bag
     end
   end
+
 
   root :to => 'sessions#new'
 
